@@ -89,15 +89,22 @@ namespace CalculadoraCientifica
 
         private void button22_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "soma";
-            lblOperacao.Text = "SOMA";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                valor1 = decimal.Parse(txtResultado.Text);
+                txtResultado.Text = "";
+                operacao = "soma";
+                lblOperacao.Text = "SOMA";
+            }
+            else
+            {
+                MessageBox.Show("Informe um número.");
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            valor2 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
+            valor2 = decimal.Parse(txtResultado.Text);
 
             switch (operacao)
             {
@@ -125,50 +132,93 @@ namespace CalculadoraCientifica
                     txtResultado.Text = Convert.ToString(Convert.ToDouble(valor1) % Convert.ToDouble(valor2));
                     break;
 
-                case "porcentagem":
-                    txtResultado.Text = (valor1 / 100).ToString();
-                    break;
-
             }
         }
 
 
         private void button23_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "subtracao";
-            lblOperacao.Text = "SUBTRAÇÃO";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                valor1 = decimal.Parse(txtResultado.Text);
+                txtResultado.Text = "";
+                operacao = "subtracao";
+                lblOperacao.Text = "SUBTRAÇÃO";
+            }
+            else
+            {
+                MessageBox.Show("Informe um número.");
+            }
+
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "multiplicacao";
-            lblOperacao.Text = "MULTIPLICAÇÃO";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                valor1 = decimal.Parse(txtResultado.Text);
+                txtResultado.Text = "";
+                operacao = "multiplicacao";
+                lblOperacao.Text = "MULTIPLICAÇÃO";
+            }
+            else
+            {
+                MessageBox.Show("Informe um número.");
+            }
+           
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "divisao";
-            lblOperacao.Text = "DIVISÃO";
+
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                valor1 = decimal.Parse(txtResultado.Text);
+                txtResultado.Text = "";
+                operacao = "divisao";
+                lblOperacao.Text = "DIVISÃO";
+            }
+            else
+            {
+                MessageBox.Show("Informe um número.");
+            }
+           
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            lblOperacao.Text = "FATORIAL";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                Single resultado = 1;
+                Single valor = Convert.ToSingle(txtResultado.Text);
+                for (int i = 1; i <= valor; i++)
+                {
+                    resultado = resultado * i;
+                }
+                txtResultado.Text = Convert.ToString(resultado);
+            }
+            else
+            {
+                MessageBox.Show("Informe um número para calcular o seu fatorial.");
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "exponenciacao";
-            lblOperacao.Text = "EXPONENCIAÇÃO";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                valor1 = decimal.Parse(txtResultado.Text);
+                txtResultado.Text = "";
+                operacao = "exponenciacao";
+                lblOperacao.Text = "EXPONENCIAÇÃO";
+            }
+            else
+            {
+                MessageBox.Show("Informe o número base da exponenciação.");
+            }
         }
+           
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -186,6 +236,7 @@ namespace CalculadoraCientifica
 
         private void button27_Click(object sender, EventArgs e)
         {
+            lblOperacao.Text = "PI";
             txtResultado.Text = "3.14159265359";
         }
 
@@ -256,10 +307,18 @@ namespace CalculadoraCientifica
 
         private void button11_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "mod";
-            lblOperacao.Text = "MOD";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                valor1 = decimal.Parse(txtResultado.Text);
+                txtResultado.Text = "";
+                operacao = "mod";
+                lblOperacao.Text = "MOD";
+            }
+            else
+            {
+                MessageBox.Show("Informe o primeiro valor para calcular o MOD");
+            }
+               
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -294,11 +353,80 @@ namespace CalculadoraCientifica
 
         private void button21_Click(object sender, EventArgs e)
         {
-            valor1 = decimal.Parse(txtResultado.Text, CultureInfo.InvariantCulture);
-            txtResultado.Text = "";
-            operacao = "porcentagem";
             lblOperacao.Text = "PORCENTAGEM";
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                txtResultado.Text = Convert.ToString(decimal.Parse(txtResultado.Text) / 100);
+            }
+            else
+            {
+                MessageBox.Show("Informe um número para calcular a porcentagem dele.");
+            }
+            
         }
 
+        private void button30_Click(object sender, EventArgs e)
+        {
+            lblOperacao.Text = "INVERSO DE SENO";
+
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                if (checkBoxRadianos.Checked == true)
+                {
+                    txtResultado.Text = Convert.ToString(System.Math.Asin(Convert.ToDouble(txtResultado.Text)));
+                }
+                else
+                {
+                    txtResultado.Text = Convert.ToString(System.Math.Asin((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Informe um número para calcular o inverso de seno.");
+            }
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+            lblOperacao.Text = "INVERSO DE COSSENO";
+
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                if (checkBoxRadianos.Checked == true)
+                {
+                    txtResultado.Text = Convert.ToString(System.Math.Acos(Convert.ToDouble(txtResultado.Text)));
+                }
+                else
+                {
+                    txtResultado.Text = Convert.ToString(System.Math.Acos((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Informe um número para calcular o inverso do cosseno.");
+            }
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            lblOperacao.Text = "INVERSO DA TANGENTE";
+
+            if (!string.IsNullOrEmpty(txtResultado.Text))
+            {
+                if (checkBoxRadianos.Checked == true)
+                {
+                    txtResultado.Text = Convert.ToString(System.Math.Atan(Convert.ToDouble(txtResultado.Text)));
+                }
+                else
+                {
+                    txtResultado.Text = Convert.ToString(System.Math.Atan((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Informe um número para calcular o inverso da tangente.");
+            }
+        }
     }
 }
