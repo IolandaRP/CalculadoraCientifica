@@ -315,6 +315,7 @@
             this.txtResultado.Name = "txtResultado";
             this.txtResultado.Size = new System.Drawing.Size(624, 34);
             this.txtResultado.TabIndex = 30;
+            this.txtResultado.TextChanged += new System.EventHandler(this.txtResultado_TextChanged);
             // 
             // button1
             // 
@@ -392,9 +393,9 @@
             this.label1.BackColor = System.Drawing.Color.Yellow;
             this.label1.Location = new System.Drawing.Point(76, 480);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(532, 20);
+            this.label1.Size = new System.Drawing.Size(527, 20);
             this.label1.TabIndex = 38;
-            this.label1.Text = "Selecionar Radianos ou Graus apenas para calcular seno, cosseno ou trangente.";
+            this.label1.Text = "Selecionar Radianos ou Graus apenas para calcular seno, cosseno ou tangente.";
             // 
             // button29
             // 

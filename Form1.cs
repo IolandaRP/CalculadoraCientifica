@@ -89,9 +89,9 @@ namespace CalculadoraCientifica
 
         private void button22_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                valor1 = decimal.Parse(txtResultado.Text);
+                valor1= valorDecimal(txtResultado.Text);
                 txtResultado.Text = "";
                 operacao = "soma";
                 lblOperacao.Text = "SOMA";
@@ -104,43 +104,52 @@ namespace CalculadoraCientifica
 
         private void button17_Click(object sender, EventArgs e)
         {
-            valor2 = decimal.Parse(txtResultado.Text);
 
-            switch (operacao)
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                case "soma":
-                    txtResultado.Text = (valor1 + valor2).ToString();
-                    break;
+                valor2 = valorDecimal(txtResultado.Text);
+                txtResultado.Text = "";
 
-                case "subtracao":
-                    txtResultado.Text = (valor1 - valor2).ToString();
-                    break;
+                switch (operacao)
+                {
+                    case "soma":
+                        txtResultado.Text = (valor1 + valor2).ToString();
+                        break;
 
-                case "multiplicacao":
-                    txtResultado.Text = (valor1 * valor2).ToString();
-                    break;
+                    case "subtracao":
+                        txtResultado.Text = (valor1 - valor2).ToString();
+                        break;
 
-                case "divisao":
-                    txtResultado.Text = (valor1 / valor2).ToString();
-                    break;
+                    case "multiplicacao":
+                        txtResultado.Text = (valor1 * valor2).ToString();
+                        break;
 
-                case "exponenciacao":
-                    txtResultado.Text = Convert.ToString(System.Math.Pow(Convert.ToDouble(valor1), Convert.ToDouble(valor2)));
-                    break;
+                    case "divisao":
+                        txtResultado.Text = (valor1 / valor2).ToString();
+                        break;
 
-                case "mod":
-                    txtResultado.Text = Convert.ToString(Convert.ToDouble(valor1) % Convert.ToDouble(valor2));
-                    break;
+                    case "exponenciacao":
+                        txtResultado.Text = Convert.ToString(System.Math.Pow(Convert.ToDouble(valor1), Convert.ToDouble(valor2)));
+                        break;
 
+                    case "mod":
+                        txtResultado.Text = Convert.ToString(Convert.ToDouble(valor1) % Convert.ToDouble(valor2));
+                        break;
+                }
             }
+            else
+            {
+                MessageBox.Show("Informe um número.");
+            }
+ 
         }
 
 
         private void button23_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                valor1 = decimal.Parse(txtResultado.Text);
+                valor1 = valorDecimal(txtResultado.Text);
                 txtResultado.Text = "";
                 operacao = "subtracao";
                 lblOperacao.Text = "SUBTRAÇÃO";
@@ -154,9 +163,9 @@ namespace CalculadoraCientifica
 
         private void button24_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                valor1 = decimal.Parse(txtResultado.Text);
+                valor1 = valorDecimal(txtResultado.Text);
                 txtResultado.Text = "";
                 operacao = "multiplicacao";
                 lblOperacao.Text = "MULTIPLICAÇÃO";
@@ -171,9 +180,9 @@ namespace CalculadoraCientifica
         private void button25_Click(object sender, EventArgs e)
         {
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                valor1 = decimal.Parse(txtResultado.Text);
+                valor1 = valorDecimal(txtResultado.Text);
                 txtResultado.Text = "";
                 operacao = "divisao";
                 lblOperacao.Text = "DIVISÃO";
@@ -188,7 +197,7 @@ namespace CalculadoraCientifica
         private void button1_Click_1(object sender, EventArgs e)
         {
             lblOperacao.Text = "FATORIAL";
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
                 Single resultado = 1;
                 Single valor = Convert.ToSingle(txtResultado.Text);
@@ -206,9 +215,9 @@ namespace CalculadoraCientifica
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                valor1 = decimal.Parse(txtResultado.Text);
+                valor1 = valorDecimal(txtResultado.Text);
                 txtResultado.Text = "";
                 operacao = "exponenciacao";
                 lblOperacao.Text = "EXPONENCIAÇÃO";
@@ -224,9 +233,12 @@ namespace CalculadoraCientifica
         {
             lblOperacao.Text = "RAIZ";
 
-            if (!String.IsNullOrEmpty(txtResultado.Text))
+            if (!String.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                txtResultado.Text = Convert.ToString(System.Math.Sqrt(Convert.ToDouble(txtResultado.Text)));
+                double raiz;
+                valor1 = valorDecimal(txtResultado.Text);
+                raiz = System.Math.Sqrt(Convert.ToDouble(valor1));
+                txtResultado.Text = Convert.ToString(raiz);
             }
             else
             {
@@ -244,16 +256,20 @@ namespace CalculadoraCientifica
         {
             lblOperacao.Text = "TANGENTE";
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
+                double tangente = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+
                 if (checkBoxRadianos.Checked == true)
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Tan(Convert.ToDouble(txtResultado.Text)));
+                    tangente = System.Math.Tan(Convert.ToDouble(valor1));
                 }
                 else
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Tan((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                    tangente = System.Math.Tan((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(valor1)));
                 }
+                txtResultado.Text = Convert.ToString(tangente);
             }
             else
             {
@@ -265,16 +281,20 @@ namespace CalculadoraCientifica
         {
             lblOperacao.Text = "SENO";
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
+                double seno = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+
                 if (checkBoxRadianos.Checked == true)
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Sin(Convert.ToDouble(txtResultado.Text)));
+                    seno = System.Math.Sin(Convert.ToDouble(valor1));   
                 }
                 else
-                {
-                    txtResultado.Text = Convert.ToString(System.Math.Sin((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                {  
+                    seno = System.Math.Sin((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(valor1)));
                 }
+                txtResultado.Text = Convert.ToString(seno);
             }
             else
             {
@@ -287,16 +307,20 @@ namespace CalculadoraCientifica
         {
             lblOperacao.Text = "COSSENO";
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
+                double cosseno = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+
                 if (checkBoxRadianos.Checked == true)
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Cos(Convert.ToDouble(txtResultado.Text)));
+                    cosseno = System.Math.Cos(Convert.ToDouble(valor1));
                 }
                 else
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Cos((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                    cosseno = System.Math.Cos((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(valor1)));
                 }
+                txtResultado.Text = Convert.ToString(cosseno);
             }
             else
             {
@@ -307,9 +331,9 @@ namespace CalculadoraCientifica
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                valor1 = decimal.Parse(txtResultado.Text);
+                valor1 = valorDecimal(txtResultado.Text);
                 txtResultado.Text = "";
                 operacao = "mod";
                 lblOperacao.Text = "MOD";
@@ -320,14 +344,16 @@ namespace CalculadoraCientifica
             }
                
         }
-
         private void button28_Click(object sender, EventArgs e)
         {
             lblOperacao.Text = "LOG NA BASE 10";
 
-            if (!String.IsNullOrEmpty(txtResultado.Text))
+            if (!String.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                txtResultado.Text = Convert.ToString(System.Math.Log10(Convert.ToDouble(txtResultado.Text)));
+                double log = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+                log = System.Math.Log10(Convert.ToDouble(valor1));
+                txtResultado.Text = Convert.ToString(log);
             }
             else
             {
@@ -336,14 +362,16 @@ namespace CalculadoraCientifica
 
 
         }
-
         private void button16_Click(object sender, EventArgs e)
         {
             lblOperacao.Text = "LOG NATURAL";
 
-            if (!String.IsNullOrEmpty(txtResultado.Text))
+            if (!String.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                txtResultado.Text = Convert.ToString(System.Math.Log(Convert.ToDouble(txtResultado.Text)));
+                double log = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+                log = System.Math.Log(Convert.ToDouble(valor1));
+                txtResultado.Text = Convert.ToString(log);
             }
             else
             {
@@ -354,9 +382,10 @@ namespace CalculadoraCientifica
         private void button21_Click(object sender, EventArgs e)
         {
             lblOperacao.Text = "PORCENTAGEM";
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
-                txtResultado.Text = Convert.ToString(decimal.Parse(txtResultado.Text) / 100);
+                valor1 = valorDecimal(txtResultado.Text);
+                txtResultado.Text = Convert.ToString(valor1 / 100);
             }
             else
             {
@@ -369,16 +398,20 @@ namespace CalculadoraCientifica
         {
             lblOperacao.Text = "INVERSO DE SENO";
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
+                double inversoSeno = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+
                 if (checkBoxRadianos.Checked == true)
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Asin(Convert.ToDouble(txtResultado.Text)));
+                    inversoSeno = System.Math.Asin(Convert.ToDouble(valor1));
                 }
                 else
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Asin((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                    inversoSeno = System.Math.Asin((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(valor1)));
                 }
+                txtResultado.Text = Convert.ToString(inversoSeno);
             }
             else
             {
@@ -391,16 +424,20 @@ namespace CalculadoraCientifica
 
             lblOperacao.Text = "INVERSO DE COSSENO";
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
+                double inversoCosseno = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+
                 if (checkBoxRadianos.Checked == true)
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Acos(Convert.ToDouble(txtResultado.Text)));
+                    inversoCosseno = System.Math.Acos(Convert.ToDouble(valor1));
                 }
                 else
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Acos((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                    inversoCosseno = System.Math.Acos((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(valor1)));
                 }
+                txtResultado.Text = Convert.ToString(inversoCosseno);
             }
             else
             {
@@ -412,21 +449,59 @@ namespace CalculadoraCientifica
         {
             lblOperacao.Text = "INVERSO DA TANGENTE";
 
-            if (!string.IsNullOrEmpty(txtResultado.Text))
+            if (!string.IsNullOrEmpty(txtResultado.Text) && validaTxtResultado(txtResultado.Text))
             {
+                double inversoTangente = 0;
+                valor1 = valorDecimal(txtResultado.Text);
+
                 if (checkBoxRadianos.Checked == true)
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Atan(Convert.ToDouble(txtResultado.Text)));
+                    inversoTangente = System.Math.Atan(Convert.ToDouble(valor1));
                 }
                 else
                 {
-                    txtResultado.Text = Convert.ToString(System.Math.Atan((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(txtResultado.Text))));
+                    inversoTangente = System.Math.Atan((Convert.ToDouble(System.Math.PI) / 180) * (Convert.ToDouble(valor1)));
                 }
+                txtResultado.Text = Convert.ToString(inversoTangente);
             }
             else
             {
                 MessageBox.Show("Informe um número para calcular o inverso da tangente.");
             }
+        }
+
+        private void txtResultado_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        public bool validaTxtResultado(string valor)
+        {
+            var validacao = false;
+
+            if (decimal.TryParse(valor,out decimal numero))
+            {
+                validacao = true;
+            }
+            else
+            {
+                validacao = false;
+            }
+            return validacao;
+        }
+
+        public decimal valorDecimal(string valor)
+        {
+            decimal valorDecimal = 0;
+
+            if (valor.Contains(","))
+            {
+                valor = valor.Replace(",", ".");
+            }
+            
+            valorDecimal = decimal.Parse(valor, CultureInfo.InvariantCulture);
+            return valorDecimal;
+
         }
     }
 }
